@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>manzano.cc</title>
+<title>manzano.cc/lab</title>
 <link rel="icon" type="image/png" href="m.cc_bk.png" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/png" href="m.cc_w.png" media="(prefers-color-scheme: dark)">
 <style>
@@ -14,6 +14,8 @@
     --white: #e8e8e8;
     --dim: #555555;
     --comment: #3a3a3a;
+    --bogavante: #D07546;
+    --crowncards: #D91E38;
     --red: #e05555;
     --purple: #9b6dcc;
     --dark: #1C1C1C;
@@ -88,6 +90,12 @@
     text-decoration: none;
     cursor: pointer;
     display: inline;
+  }
+  .shiny.bogavante {
+    background-image: linear-gradient(90deg, var(--bogavante) 15%, #ffd4a8 50%, var(--bogavante) 85%);
+  }
+  .shiny.crowncards-shine {
+    background-image: linear-gradient(90deg, var(--crowncards) 15%, #ff8a96 50%, var(--crowncards) 85%);
   }
   .shiny.white-shine {
     background-image: linear-gradient(90deg, var(--white) 15%, #ffffff 50%, var(--white) 85%);
@@ -184,16 +192,58 @@ const lines = [
   },
   { plain: '' },
   {
-    plain: 'building random stuff. explore our lab.',
-    final: `<span class="c-white">building random stuff. explore our </span><a href="https://www.manzano.cc/lab" class="shiny lab-shine">lab</a><span class="c-white">.</span>`
+    plain: 'const projects = [',
+    final: `<span class="c-white">const projects = [</span>`
+  },
+  {
+    plain: '  {',
+    final: `<span class="c-white">  {</span>`
+  },
+  {
+    plain: '    name:   "bogavante.ai",',
+    final: `<span class="c-white">    name:   </span><a href="https://www.bogavante.ai" target="_blank" class="shiny bogavante">"bogavante.ai"</a><span class="c-white">,</span>`
+  },
+  {
+    plain: '    status: "live",',
+    final: `<span class="c-white">    status: "live",</span>`
+  },
+  {
+    plain: '  },',
+    final: `<span class="c-white">  },</span>`
+  },
+  {
+    plain: '  {',
+    final: `<span class="c-white">  {</span>`
+  },
+  {
+    plain: '    name:   "CrownCards.app",',
+    final: `<span class="c-white">    name:   </span><a href="https://crown-cards-phi.vercel.app/solitario.html" target="_blank" class="shiny crowncards-shine">"CrownCards.app"</a><span class="c-white">,</span>`
+  },
+  {
+    plain: '    status: "live",',
+    final: `<span class="c-white">    status: "live",</span>`
+  },
+  {
+    plain: '  },',
+    final: `<span class="c-white">  },</span>`
+  },
+  {
+    plain: '  { name: "???", status: "coming_soon" },',
+    final: `<span class="c-white">  { name: </span><span class="c-dim">"???"</span><span class="c-white">, status: </span><span class="c-dim">"coming_soon"</span><span class="c-white"> },</span>`
+  },
+  {
+    plain: '  { name: "???", status: "coming_soon" },',
+    final: `<span class="c-white">  { name: </span><span class="c-dim">"???"</span><span class="c-white">, status: </span><span class="c-dim">"coming_soon"</span><span class="c-white"> },</span>`
+  },
+  {
+    plain: '];',
+    final: `<span class="c-white">];</span>`
   },
   { plain: '' },
   {
     plain: 'engineered by ignacio.info & enrineer.com',
     final: `<span class="c-white">engineered by </span><a href="https://www.ignacio.info" target="_blank" class="shiny red-shine">ignacio.info</a><span class="c-white"> &amp; </span><a href="https://www.enrineer.com" target="_blank" class="shiny purple-shine">enrineer.com</a>`
   },
-  { plain: '' },
-  { plain: '' },
   { plain: '' },
   { plain: '' },
   {
