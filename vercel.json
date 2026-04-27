@@ -1,5 +1,8 @@
 {
   "rewrites": [
     { "source": "/lab", "destination": "/lab.html" }
+  ],
+  "errorRoutes": [
+    { "statusCode": 404, "destination": "/404.html" }
   ]
 }
