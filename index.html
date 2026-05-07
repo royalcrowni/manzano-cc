@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>manzano.cc</title>
-<link rel="icon" type="image/png" href="m.cc_bk.png" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/png" href="m.cc_w.png" media="(prefers-color-scheme: dark)">
+<link rel="shortcut icon" href="/m.cc_bk.png?v=2">
+<link rel="icon" type="image/png" href="/m.cc_bk.png?v=2" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="/m.cc_w.png?v=2" media="(prefers-color-scheme: dark)">
 <style>
   @import url('https://fonts.cdnfonts.com/css/dank-mono');
 
@@ -14,19 +15,37 @@
     --white: #e8e8e8;
     --dim: #555555;
     --comment: #3a3a3a;
-    --red: #e05555;
+    --ainews: #D13D45;
+    --airoi: #D07546;
+    --bdash: #9b6dcc;
+    --carbon: #4a9e6b;
+    --blue: #5b8fe8;
     --purple: #9b6dcc;
-    --dark: #1C1C1C;
+    --lab: #c8a800;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html, body {
-    background: var(--bg);
+  html {
+    background: #111111;
+  }
+
+  body {
+    background: #111111;
     color: var(--white);
     font-family: 'Dank Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     overflow-x: hidden;
+  }
+
+  /* Fix iOS grey bars */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      background-color: #111111;
+    }
   }
 
   body::before {
@@ -72,7 +91,6 @@
   .c-comment { color: var(--comment); }
   .c-dim     { color: var(--dim); }
   .c-white   { color: var(--white); }
-  .c-dark    { color: var(--dark); }
 
   @keyframes shine {
     0%   { background-position: -200% center; }
@@ -93,17 +111,23 @@
     background-image: linear-gradient(90deg, var(--white) 15%, #ffffff 50%, var(--white) 85%);
   }
   .shiny.lab-shine {
-    background-image: linear-gradient(90deg, #c8a800 15%, #ffe066 50%, #c8a800 85%);
+    background-image: linear-gradient(90deg, var(--lab) 15%, #ffe066 50%, var(--lab) 85%);
     font-style: italic;
   }
-  .shiny.red-shine {
-    background-image: linear-gradient(90deg, var(--red) 15%, #ffb5b5 50%, var(--red) 85%);
+  .shiny.ainews-shine {
+    background-image: linear-gradient(90deg, var(--ainews) 15%, #ff9a9e 50%, var(--ainews) 85%);
   }
-  .shiny.purple-shine {
-    background-image: linear-gradient(90deg, var(--purple) 15%, #ddb8ff 50%, var(--purple) 85%);
+  .shiny.airoi-shine {
+    background-image: linear-gradient(90deg, var(--airoi) 15%, #ffd4a8 50%, var(--airoi) 85%);
   }
-  .shiny.dark-shine {
-    background-image: linear-gradient(90deg, #555 15%, #888888 50%, #555 85%);
+  .shiny.bdash-shine {
+    background-image: linear-gradient(90deg, var(--bdash) 15%, #ddb8ff 50%, var(--bdash) 85%);
+  }
+  .shiny.carbon-shine {
+    background-image: linear-gradient(90deg, var(--carbon) 15%, #a8ffca 50%, var(--carbon) 85%);
+  }
+  .shiny.blue-shine {
+    background-image: linear-gradient(90deg, var(--blue) 15%, #b8d4ff 50%, var(--blue) 85%);
   }
 
   .cur {
@@ -137,19 +161,11 @@ function getLastLogin() {
   const now = new Date();
   const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  const day = days[now.getDay()];
-  const month = months[now.getMonth()];
-  const date = String(now.getDate()).padStart(2, '0');
-  const year = now.getFullYear();
-  return `${day} ${month} ${date} ${year}`;
+  return `${days[now.getDay()]} ${months[now.getMonth()]} ${String(now.getDate()).padStart(2,'0')} ${now.getFullYear()}`;
 }
-
 function getConsoleTime() {
   const now = new Date();
-  const h = String(now.getHours()).padStart(2, '0');
-  const m = String(now.getMinutes()).padStart(2, '0');
-  const s = String(now.getSeconds()).padStart(2, '0');
-  return `${h}:${m}:${s}`;
+  return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
 }
 
 const lines = [
@@ -184,19 +200,59 @@ const lines = [
   },
   { plain: '' },
   {
+    plain: '{name: "AI News Digest", status: "live"}',
+    final: `<span class="c-white">{name: </span><a href="https://manzano.cc/ai-news" class="shiny ainews-shine">"AI News Digest"</a><span class="c-white">, status: "live"}</span>`
+  },
+  {
+    plain: '  Daily AI news and insights delivered straight to your inbox.',
+    final: `<span class="c-dim">  Daily AI news and insights delivered straight to your inbox.</span>`
+  },
+  { plain: '' },
+  {
+    plain: '{name: "AI ROI", status: "live"}',
+    final: `<span class="c-white">{name: </span><a href="https://airoi.manzano.cc" class="shiny airoi-shine">"AI ROI"</a><span class="c-white">, status: "live"}</span>`
+  },
+  {
+    plain: '  Measure the real business impact and ROI of AI in your company.',
+    final: `<span class="c-dim">  Measure the real business impact and ROI of AI in your company.</span>`
+  },
+  { plain: '' },
+  {
+    plain: '{name: "BDash", status: "paused"}',
+    final: `<span class="c-white">{name: </span><a href="https://bdash.manzano.cc" class="shiny bdash-shine">"BDash"</a><span class="c-white">, status: "paused"}</span>`
+  },
+  {
+    plain: '  The open-source control center for AI business development agents.',
+    final: `<span class="c-dim">  The open-source control center for AI business development agents.</span>`
+  },
+  { plain: '' },
+  {
+    plain: '{name: "CarbonLens", status: "live"}',
+    final: `<span class="c-white">{name: </span><a href="https://carbolens.manzano.cc" class="shiny carbon-shine">"CarbonLens"</a><span class="c-white">, status: "live"}</span>`
+  },
+  {
+    plain: '  Evaluate environmental impact, CO₂ emissions, and sustainability performance.',
+    final: `<span class="c-dim">  Evaluate environmental impact, CO₂ emissions, and sustainability performance.</span>`
+  },
+  { plain: '' },
+  {
+    plain: '// other',
+    final: `<span class="c-comment">// other</span>`
+  },
+  { plain: '' },
+  {
     plain: 'building random stuff',
     final: `<span class="c-white">building random stuff</span>`
   },
   {
-    plain: 'explore our lab.',
-    final: `<span class="c-white">explore our </span><a href="https://www.manzano.cc/lab" class="shiny lab-shine">lab</a><span class="c-white">.</span>`
+    plain: 'explore our /lab.',
+    final: `<span class="c-white">explore our </span><a href="https://www.manzano.cc/lab" class="shiny lab-shine">/lab</a><span class="c-white">.</span>`
   },
   { plain: '' },
   {
-    plain: 'engineered by ignacio.info & enrineer.com',
-    final: `<span class="c-white">engineered by </span><a href="https://www.ignacio.info" target="_blank" class="shiny red-shine">ignacio.info</a><span class="c-white"> &amp; </span><a href="https://www.enrineer.com" target="_blank" class="shiny purple-shine">enrineer.com</a>`
+    plain: 'Developed by ignacio.info.',
+    final: `<span class="c-white">Developed by </span><a href="https://www.ignacio.info" target="_blank" class="shiny blue-shine">ignacio.info</a><span class="c-white">.</span>`
   },
-
 ];
 
 const codeEl = document.getElementById('code');
@@ -215,20 +271,16 @@ function nextLine() {
     if (cur) cur.remove();
     return;
   }
-
   const data = lines[idx];
   const el = document.createElement('span');
   el.className = 'line';
   el.style.display = 'block';
   codeEl.appendChild(el);
-
   if (cur) cur.remove();
   cur = document.createElement('span');
   cur.className = 'cur';
   el.appendChild(cur);
-
   el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
   if (data.plain === '') {
     setTimeout(() => {
       el.innerHTML = '';
@@ -237,10 +289,8 @@ function nextLine() {
     }, 25);
     return;
   }
-
   const text = data.plain;
   let ci = 0;
-
   function tick() {
     if (ci >= text.length) {
       el.innerHTML = data.final || text;
@@ -256,7 +306,6 @@ function nextLine() {
     ci++;
     setTimeout(tick, charDelay(text[ci - 1]));
   }
-
   tick();
 }
 
