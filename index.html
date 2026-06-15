@@ -284,9 +284,19 @@
       });
     }
 
-    document.getElementById('svg-manzano_cuadro').addEventListener('click',    () => pixelDissolve('frame1', 'frame2'));
-    document.getElementById('svg-puerto_rico').addEventListener('click',        () => pixelDissolve('frame2', 'frame3'));
-    document.getElementById('svg-teodosio_grabado').addEventListener('click',   () => pixelDissolve('frame3', 'frame1'));
+    let clicks1 = 0;
+    document.getElementById('svg-manzano_cuadro').addEventListener('click', () => {
+      clicks1++;
+      if (clicks1 >= 5) { clicks1 = 0; pixelDissolve('frame1', 'frame2'); }
+    });
+
+    let clicks2 = 0;
+    document.getElementById('svg-puerto_rico').addEventListener('click', () => {
+      clicks2++;
+      if (clicks2 >= 13) { clicks2 = 0; pixelDissolve('frame2', 'frame3'); }
+    });
+
+    document.getElementById('svg-teodosio_grabado').addEventListener('click', () => pixelDissolve('frame3', 'frame1'));
 
     document.getElementById('svg-ignacio_manzano').addEventListener('click', () => {
       window.open('https://www.ignaciomanzano.com', '_blank');
